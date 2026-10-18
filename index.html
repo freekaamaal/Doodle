@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Doodle Steps</title>
+<meta name="description" content="Step-by-step drawing lessons for kids, from first shapes to real sketches.">
+<meta name="theme-color" content="#eef6ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Doodle Steps">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top" id="homeTop">
+  <div class="brand">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 38 L30 10 L38 18 L18 46 Z" fill="var(--accent)"/><path d="M10 38 L18 46 L8 48 Z" fill="var(--ink)"/><path d="M30 10 L38 18" stroke="var(--ink)" stroke-width="2"/></svg>
+    <div><h1>Doodle Steps</h1><p>Learn to draw, one line at a time</p></div>
+  </div>
+  <button class="icon-btn" id="progressBtn" type="button" aria-label="My progress">
+    <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+    <span id="starCount">0</span>
+  </button>
+</header>
+
+<main id="home">
+  <section class="daily" id="daily"></section>
+
+  <nav class="levels" id="levels" aria-label="Difficulty">
+    <button type="button" data-level="all" class="on">All</button>
+    <button type="button" data-level="easy">Easy</button>
+    <button type="button" data-level="medium">Medium</button>
+    <button type="button" data-level="hard">Hard</button>
+    <button type="button" data-level="fav">♥ Favourites</button>
+  </nav>
+  <nav class="cats" id="cats" aria-label="Category"></nav>
+
+  <section class="grid" id="grid"></section>
+  <p class="empty" id="empty" hidden>Nothing here yet. Tap the heart on a picture to add it to favourites.</p>
+</main>
+
+<section id="lesson" hidden>
+  <div class="lesson-top">
+    <button class="icon-btn" id="backBtn" type="button" aria-label="Back to pictures"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="lesson-title"><h2 id="lessonName">Cat</h2><span class="badge" id="lessonLevel">easy</span></div>
+    <button class="icon-btn" id="favBtn" type="button" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.3 5.3 0 0 1 12 6.2 5.3 5.3 0 0 1 21.3 12C19 16.4 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+  </div>
+
+  <div class="mode" role="tablist">
+    <button type="button" id="modeWatch" class="on" role="tab">Watch</button>
+    <button type="button" id="modeDraw" role="tab">Draw</button>
+  </div>
+
+  <div class="board" id="board">
+    <div class="stage" id="stage">
+      <svg class="art" id="art" viewBox="0 0 300 300" aria-hidden="true"></svg>
+      <canvas id="pad" width="1200" height="1200"></canvas>
+    </div>
+    <button class="zoom-reset" id="zoomReset" type="button" hidden>Reset zoom</button>
+  </div>
+
+  <div class="hint" id="hintBox"><span class="n" id="stepNo">1</span><span id="hintText"></span></div>
+  <div class="dots" id="dots"></div>
+
+  <div class="nav" id="nav">
+    <button id="prevBtn" type="button">◀ Back</button>
+    <button id="playBtn" type="button" aria-label="Play all steps">▶ Play</button>
+    <button id="nextBtn" type="button" class="primary">Next ▶</button>
+  </div>
+
+  <div class="tools" id="tools" hidden>
+    <div class="row">
+      <button class="tool on" data-tool="pencil" type="button">Pencil</button>
+      <button class="tool" data-tool="crayon" type="button">Crayon</button>
+      <button class="tool" data-tool="eraser" type="button">Eraser</button>
+      <button class="tool" id="guideBtn" type="button">Guide: faint</button>
+    </div>
+    <div class="row swatches" id="swatches"></div>
+    <div class="row">
+      <label class="size">Size <input type="range" id="size" min="1" max="10" value="4"></label>
+      <button class="mini" id="undoBtn" type="button">Undo</button>
+      <button class="mini" id="clearBtn" type="button">Clear</button>
+      <button class="mini" id="saveBtn" type="button">Save picture</button>
+    </div>
+  </div>
+
+  <div class="cheer" id="cheer">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+    <div id="cheerText">You did it!</div>
+    <div class="cheer-actions"><button type="button" id="cheerDraw" class="primary">Draw it yourself</button><button type="button" id="cheerNext">Next picture</button></div>
+  </div>
+</section>
+
+<div class="modal" id="saveModal" hidden>
+  <div class="modal-card">
+    <h3>Your drawing</h3>
+    <img id="saveImg" alt="Your drawing">
+    <p>On iPad: press and hold the picture, then tap <b>Save to Photos</b>.</p>
+    <div class="row"><a id="saveLink" class="btn primary" download="my-drawing.png">Download</a><button type="button" class="btn" id="saveClose">Close</button></div>
+  </div>
+</div>
+
+<div class="modal" id="progressModal" hidden>
+  <div class="modal-card">
+    <h3>My progress</h3>
+    <div id="progressBody"></div>
+    <div class="row"><button type="button" class="btn" id="progressClose">Close</button></div>
+  </div>
+</div>
+
+<script src="lessons.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
